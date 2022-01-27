@@ -1,0 +1,35 @@
+{% extends 'index.html'%}
+{% load censor_filters %}
+{%block title%}
+{{title}}
+{%endblock title%}
+{%block containe%}
+<h4> Автор: {{author}}</h4>
+<div class="container">
+			<div class="row">
+				<div class="col-md-7 text-left">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeInUp">
+							<h1 class="mb30"><a href="http://127.0.0.1:8000/{{link}}">{{title|multiply}}</a></h1><!--фильтр что проверяет не вхождение следующих слов ["дурак", 'невежда', 'редиска'] -->
+							<p>by <a href="#" class="text-link">{{author}}</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div id="gtco-maine">
+		<div class="container">
+			<div class="row row-pb-md">
+				<div class="col-md-12">
+					<article class="mt-negative">
+						<div class="text-left content-article">
+							<div class="row row-pb-sm">
+								<div class="col-md-12 animate-box">
+									<blockquote>
+										<p>{{text|multiply|truncatechars:50}}<cite></cite></p><!--фильтр что проверяет не вхождение следующих слов ["дурак", 'невежда', 'редиска'] -->
+									</blockquote>
+								</div>
+							</div>
+{%endblock containe%}

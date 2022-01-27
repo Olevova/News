@@ -1,0 +1,39 @@
+{% extends 'index.html'%}
+{% load censor_filters %}
+{%block title%}
+{{piece}}
+{%endblock title%}
+{%block containe%}
+<h5>время: {{timenow}}</h5>
+{%for i in auf%}
+<h5> auf : {{i.user.username}}</h5>
+{%endfor%}
+<div class="container">
+			<div class="row">
+				<div class="col-md-7 text-left">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeInUp">
+							<span class="date-post">{{piece.create|date:"d M Y H:i"}}</span>
+							<h1 class="mb30"><a href="#">{{piece.title|multiply}}</a></h1><!--фильтр что проверяет не вхождение следующих слов ["дурак", 'невежда', 'редиска'] -->
+							<p>by <a href="#" class="text-link">{{piece.author.user.username}}</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div id="gtco-maine">
+		<div class="container">
+			<div class="row row-pb-md">
+				<div class="col-md-12">
+					<article class="mt-negative">
+						<div class="text-left content-article">
+							<div class="row row-pb-sm">
+								<div class="col-md-12 animate-box">
+									<blockquote>
+										<p>{{piece.text|multiply}}<cite></cite></p><!--фильтр что проверяет не вхождение следующих слов ["дурак", 'невежда', 'редиска'] -->
+									</blockquote>
+								</div>
+							</div>
+{%endblock containe%}

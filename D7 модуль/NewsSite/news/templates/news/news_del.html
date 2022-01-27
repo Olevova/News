@@ -1,0 +1,41 @@
+{% extends 'index.html'%}
+{% load censor_filters %}
+{%block title%}
+{{piece}}
+{%endblock title%}
+{%block containe%}
+<h3>{{piece.title}}</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <td>
+            <h5>Заголовок</h5>
+        </td>
+        <td>
+            <h5>Дата публикации</h5>
+        </td>
+        <td>
+            <h5>Tекст</h5>
+        </td>
+    </tr>
+    </thead>
+    <tr>
+        <td>
+            {{piece.title|multiply}}
+            <!--фильтр что проверяет не вхождение следующих слов ["дурак", 'невежда', 'редиска'] -->
+        </td>
+        <td>
+            {{piece.create|date:"d M Y H:i"}}
+        </td>
+        <td>
+            {{piece.text|truncatechars:50|multiply}}
+            <!--фильтр что проверяет не вхождение следующих слов ["дурак", 'невежда', 'редиска'] -->
+        </td>
+    </tr>
+</table>
+<form method="POST">
+    {% csrf_token %}
+    {{ form }} <!-- Теперь нам нужна только готовая форма и кнопка -->
+    <input type="submit" value="Удалить новость">
+</form>
+{%endblock containe%}

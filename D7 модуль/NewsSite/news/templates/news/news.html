@@ -1,0 +1,50 @@
+{% extends 'index.html'%}
+{% load censor_filters %}
+{%block title%}
+{{news}}
+{%endblock title%}
+{%block sidebar %}
+{%for i in category%}
+    {% if i.pk == category_selected %}
+<a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="{{i.get_absolute_url}}" role="tab" aria-controls="list-home">{{i.name}}</a>
+    {%else%}
+<a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="{{i.get_absolute_url}}" role="tab" aria-controls="list-profile">{{i.name}}</a>
+    {%endif%}
+{%endfor%}
+{%endblock sidebar%}
+{%block containe%}
+{% if not_sub%}
+<button class="btn btn-primary" type="button"> <a href="{%url 'sub' category_selected%}"> Хочу Подписаться на рассылку!</a> {{category_selected}}</button>
+{% endif %}
+<p>
+<div class="card text-center"><h5>количество новостей : {{news|length}}</h5></div>
+</p>
+<form method="GET">
+    <div class="mb-3">
+    {{filter.form}}
+    <input type="submit" value="Найти">
+    </div>
+</form>
+{%if news%}
+{%for i in news%}
+    <div class="card text-center">
+  <div class="card-header">
+      {%for t in i.category.all %}
+    {{t}}
+      {%endfor%}
+  </div>
+        <p>
+  <div class="card-body">
+    <a class="card-title" href="{%url 'ObjNews.html' i.pk%}"><h5>{{i.title}}</h5></a>
+    <p class="card-text">{{i.text|truncatechars:50|multiply}}</p>
+      <a class="btn btn-outline-primary btn-sm " href="{% url 'add' i.pk%}">Редактировать</a>
+                    <a class="btn btn-outline-primary btn-sm " href="{% url 'news_del' i.pk%}">Удалить</a>
+  </div>
+  <div class="card-footer text-muted">
+    {{i.create|date:"d M Y H:i"}}
+  </div>
+</div>
+</p>
+    {%endfor%}
+    {%endif%}
+{%endblock containe%}
