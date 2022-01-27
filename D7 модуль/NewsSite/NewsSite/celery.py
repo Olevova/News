@@ -10,7 +10,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'every_week_news_mailing_list': {
         'task': 'news.tasks.SendNew',
-        'schedule': crontab(),
-        #'schedule': crontab(hour=8, minute=0, day_of_week='monday'),
+        #'schedule': crontab(),
+        'schedule': crontab(hour=8, minute=0, day_of_week='monday'),
     },
 }
